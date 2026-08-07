@@ -1,0 +1,91 @@
+---
+const shots = [
+  { src: "/screenshots/real/photo_2026-08-07_15-27-34.jpg", label: "Home" },
+  { src: "/screenshots/real/photo_2026-08-07_15-27-36.jpg", label: "Browse" },
+  { src: "/screenshots/real/photo_2026-08-07_15-27-39.jpg", label: "Details" },
+  { src: "/screenshots/real/photo_2026-08-07_15-27-42.jpg", label: "Player" },
+  { src: "/screenshots/real/photo_2026-08-07_15-27-45.jpg", label: "Library" },
+  { src: "/screenshots/real/photo_2026-08-07_15-27-48.jpg", label: "TV Home" },
+  { src: "/screenshots/real/photo_2026-08-07_15-27-51.jpg", label: "TV Player" },
+];
+---
+
+<section class="shots">
+  <div class="head">
+    <h2>Screenshots</h2>
+  </div>
+  <div class="scroller">
+    {shots.map(s => (
+      <figure class="shot">
+        <img src={s.src} alt={s.label} loading="lazy" decoding="async" />
+        <figcaption>{s.label}</figcaption>
+      </figure>
+    ))}
+  </div>
+</section>
+
+<style>
+  .shots {
+    padding: 28px 0 10px;
+    background: #091312;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .head {
+    max-width: 920px;
+    margin: 0 auto 16px;
+    padding: 0 52px;
+    text-align: center;
+  }
+  .head h2 {
+    margin: 0;
+    font-size: clamp(22px, 2.6vw, 28px);
+    letter-spacing: -0.03em;
+    color: #fff;
+  }
+  .head p {
+    margin: 8px auto 0;
+    color: #9aa0a6;
+    font-size: 13px;
+  }
+  .scroller {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 0 52px 14px;
+    max-width: 1100px;
+    margin: 0 auto;
+    scrollbar-width: none;
+  }
+  .scroller::-webkit-scrollbar { display: none; }
+  .shot {
+    flex: 0 0 172px;
+    scroll-snap-align: start;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .shot:nth-child(n+5) { flex: 0 0 280px; }
+  .shot img {
+    width: 100%;
+    height: auto;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: #000;
+    display: block;
+    aspect-ratio: auto;
+  }
+  .shot figcaption {
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: #9aa0a6;
+  }
+  @media (max-width: 900px) {
+    .head { padding: 0 18px; }
+    .scroller { padding: 0 18px 14px; }
+    .shot { flex: 0 0 148px; }
+    .shot:nth-child(n+5) { flex: 0 0 240px; }
+  }
+</style>

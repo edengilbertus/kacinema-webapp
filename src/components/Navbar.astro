@@ -1,0 +1,109 @@
+---
+interface Props { version?: { apkUrl: string; apkUrlTv?: string; pcUrl?: string | null; macUrl?: string | null; name: string; code: number } }
+const { version } = Astro.props as Props;
+// fallback href if version not passed
+const dlHref = version?.apkUrl ?? "#download";
+---
+
+<header class="nav">
+	<a class="brand" href="#" aria-label="KaCinema home">
+		<span class="brandWord">KaCinema<span class="oracle">Oracle</span></span>
+	</a>
+
+	<nav class="links" aria-label="Primary">
+		<a href="#">Home</a>
+		<a href="#features">Features</a>
+		<a href="#platforms">Platforms</a>
+		<a href="#download">Download</a>
+	</nav>
+
+	<a class="download" href={dlHref} data-dl="primary" target={dlHref.startsWith("http") ? "_blank" : undefined} rel={dlHref.startsWith("http") ? "noopener" : undefined}>
+		<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+			<path d="M12 16.5 6.2 10.7 7.6 9.3l3.4 3.4V3h2v10.3l3.4-3.4 1.4 1.4L12 16.5ZM4.5 18v2h15v-2H4.5Z" />
+		</svg>
+		<span>Download</span>
+	</a>
+</header>
+
+<style>
+	.nav {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 30px 52px;
+	}
+
+	.brand {
+		text-decoration: none;
+		display: inline-flex;
+		align-items: baseline;
+	}
+
+	.brandWord {
+		font-weight: 800;
+		letter-spacing: -0.035em;
+		color: #0b0b0f;
+		font-size: 27px;
+		display: inline-flex;
+		gap: 4px;
+		align-items: baseline;
+	}
+
+	.brandWord .oracle {
+		font-weight: 400;
+		letter-spacing: -0.02em;
+		color: #d02568;
+	}
+
+	.links {
+		display: flex;
+		gap: 42px;
+	}
+
+	.links a {
+		color: #17171b;
+		text-decoration: none;
+		font-size: 17px;
+		font-weight: 500;
+		transition: color 0.2s;
+	}
+
+	.links a:hover {
+		color: #d02568;
+	}
+
+	.download {
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+		background: #038b7c;
+		color: #ffffff;
+		padding: 15px 28px;
+		border-radius: 999px;
+		font-weight: 700;
+		font-size: 16px;
+		text-decoration: none;
+		transition:
+			background 0.2s,
+			transform 0.15s;
+		box-shadow: 0 8px 24px rgba(3, 139, 124, 0.28);
+	}
+
+	.download:hover {
+		background: #027a6d;
+		transform: translateY(-1px);
+	}
+	.download:active {
+		transform: translateY(0);
+	}
+
+	@media (max-width: 900px) {
+		.nav {
+			padding: 20px 24px;
+		}
+
+		.links {
+			display: none;
+		}
+	}
+</style>

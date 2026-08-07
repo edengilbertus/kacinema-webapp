@@ -1,11 +1,113 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+import Platforms from '../components/Platforms.astro';
+import Screenshots from '../components/Screenshots.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const VERSION_URL = "https://pub-10cadac4a39b4f1a93e87fa79d05c668.r2.dev/version.json";
+const FALLBACK = {
+	code: 21,
+	name: "1.1.21",
+	apkUrl: "https://pub-10cadac4a39b4f1a93e87fa79d05c668.r2.dev/kacinema-1.1.21.apk",
+	changelog: "Android TV D-pad fix. R8 obfuscation. VJ Browse cards. Home carousel. Dynamic VJ rows. New Releases.",
+};
+
+let version = FALLBACK;
+try {
+	const res = await fetch(VERSION_URL, { headers: { "cache-control": "no-cache" } });
+	if (res.ok) {
+		const j = await res.json();
+		version = {
+			code: j.versionCode ?? j.code ?? FALLBACK.code,
+			name: j.versionName ?? j.name ?? FALLBACK.name,
+			apkUrl: j.apkUrl ?? j.androidUrl ?? FALLBACK.apkUrl,
+			apkUrlTv: j.apkUrlTv ?? j.tvUrl ?? j.apkUrl ?? FALLBACK.apkUrl,
+			pcUrl: j.pcUrl ?? j.windowsUrl ?? null,
+			macUrl: j.macUrl ?? j.macosUrl ?? null,
+			changelog: j.changelog ?? FALLBACK.changelog,
+		};
+	}
+} catch {}
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="KaCinema Oracle — All Your Movies In One Place">
+	<main class="panel">
+		<Navbar version={version} />
+		<Hero version={version} />
+		<Platforms version={version} />
+		<Screenshots />
+	</main>
+
+	<div class="footWrap">
+		<footer class="foot">
+			<span>© {new Date().getFullYear()} KaCinema Oracle • <a href="https://t.me/carthigan" target="_blank" rel="noopener" class="footLink">Telegram</a></span>
+		</footer>
+	</div>
 </Layout>
+
+<script is:inline define:vars={{ versionUrl: VERSION_URL }}>
+	// Client-side refresh to always get latest without rebuild
+	(async () => {
+		try {
+			const r = await fetch(versionUrl, { cache: "no-store" });
+			if (!r.ok) return;
+			const j = await r.json();
+			const apk = j.apkUrl || j.androidUrl;
+			const apkTv = j.apkUrlTv || j.tvUrl || apk;
+			const pc = j.pcUrl || j.windowsUrl;
+			const mac = j.macUrl || j.macosUrl;
+			const ver = j.versionName || j.name;
+			if (apk) {
+				document.querySelectorAll('a[data-dl="android"], a[data-dl="primary"]').forEach(a => a.href = apk);
+				const eyebrow = document.querySelector('[data-eyebrow]');
+				if (eyebrow && ver) eyebrow.textContent = `KaCinema Oracle — v${ver}`;
+			}
+			if (apkTv) document.querySelectorAll('a[data-dl="tv"]').forEach(a => a.href = apkTv);
+			if (pc) document.querySelectorAll('a[data-dl="pc"]').forEach(a => { a.href = pc; a.classList.remove('soon'); a.querySelector('.badge')?.classList.replace('soon','ok'); const b=a.querySelector('.badge'); if(b) b.textContent='Available'; });
+			if (mac) document.querySelectorAll('a[data-dl="mac"]').forEach(a => { a.href = mac; a.classList.remove('soon'); a.querySelector('.badge')?.classList.replace('soon','ok'); const b=a.querySelector('.badge'); if(b) b.textContent='Available'; });
+		} catch {}
+	})();
+</script>
+
+<style>
+	.panel {
+		margin: clamp(16px, 8vh, 120px) clamp(12px, 8vw, 190px) 0;
+		border-radius: 12px;
+		overflow: hidden;
+		background:
+			radial-gradient(42% 34% at 88% 12%, rgba(238, 120, 178, 0.55) 0%, rgba(238, 120, 178, 0) 100%),
+			radial-gradient(36% 30% at 8% 6%, rgba(244, 150, 196, 0.5) 0%, rgba(244, 150, 196, 0) 100%),
+			radial-gradient(50% 42% at 78% 78%, rgba(247, 180, 214, 0.55) 0%, rgba(247, 180, 214, 0) 100%),
+			radial-gradient(45% 40% at 20% 85%, rgba(252, 214, 231, 0.7) 0%, rgba(252, 214, 231, 0) 100%),
+			linear-gradient(115deg, #fbd9e7 0%, #f8cade 45%, #f5bcd4 100%);
+		box-shadow: 0 16px 48px rgba(23, 23, 27, 0.08);
+	}
+
+	.footWrap {
+		background: #091312;
+		margin: 0 clamp(12px, 8vw, 190px);
+		border-radius: 0 0 12px 12px;
+		overflow: hidden;
+	}
+	.foot {
+		display: flex;
+		justify-content: center;
+		max-width: 1100px;
+		margin: 0 auto;
+		padding: 20px 52px;
+		font-size: 13px;
+		color: #6b6b77;
+		border-top: 1px solid rgba(255,255,255,0.08);
+	}
+	.footLink {
+		color: #9aa0a6;
+		text-decoration: none;
+		border-bottom: 1px dotted rgba(154,160,166,0.5);
+	}
+	.footLink:hover { color: #e8eaed; border-bottom-color: rgba(232,234,237,0.9); }
+
+	@media (max-width: 900px) {
+		.foot { justify-content: center; text-align: center; }
+	}
+</style>
