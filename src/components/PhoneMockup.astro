@@ -49,8 +49,7 @@ import Logo from './Logo.astro';
 <style>
 	.phone {
 		position: relative;
-		width: 392px;
-		max-width: 92vw;
+		width: min(392px, 92vw);
 		margin: 32px auto -80px;
 	}
 
@@ -68,12 +67,25 @@ import Logo from './Logo.astro';
 	.screen {
 		display: flex;
 		flex-direction: column;
-		height: 840px;
+		height: min(840px, 72dvh);
+		aspect-ratio: 392 / 840;
+		max-height: 840px;
 		background: #091312;
-		border: 10px solid #0d0d10;
-		border-radius: 56px;
+		border: 8px solid #0d0d10;
+		border-radius: 48px;
 		overflow: hidden;
-		box-shadow: 0 40px 90px rgba(0, 0, 0, 0.35);
+		box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+	}
+
+	@media (max-width: 520px) {
+		.phone { margin: 20px auto -40px; width: min(340px, 88vw); }
+		.screen { height: auto; border-width: 6px; border-radius: 36px; }
+		.side { display: none; }
+		.statusbar { padding: 12px 18px 0; height: 38px; }
+		.island { width: 90px; height: 26px; top: 10px; }
+		.time { font-size: 12px; }
+		.app-header { margin-top: 6px; }
+		.realShot { margin: 10px 8px 8px; border-radius: 18px; }
 	}
 
 	.statusbar {

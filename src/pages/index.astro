@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Hero from '../components/Hero.astro';
 import Platforms from '../components/Platforms.astro';
+import Fanime from '../components/Fanime.astro';
 import Screenshots from '../components/Screenshots.astro';
 
 const VERSION_URL = "https://pub-10cadac4a39b4f1a93e87fa79d05c668.r2.dev/version.json";
@@ -36,6 +37,7 @@ try {
 		<Navbar version={version} />
 		<Hero version={version} />
 		<Platforms version={version} />
+		<Fanime />
 		<Screenshots />
 	</main>
 
@@ -108,6 +110,10 @@ try {
 	.footLink:hover { color: #e8eaed; border-bottom-color: rgba(232,234,237,0.9); }
 
 	@media (max-width: 900px) {
-		.foot { justify-content: center; text-align: center; }
+		.foot { justify-content: center; text-align: center; padding: 16px 18px; }
+	}
+	@media (max-width: 520px) {
+		.panel { margin: 12px 10px 0; border-radius: 14px; }
+		.footWrap { margin: 0 10px; }
 	}
 </style>

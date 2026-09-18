@@ -188,4 +188,16 @@ const dlHref = version?.apkUrl ?? "#download";
 		background: rgba(255, 255, 255, 0.5);
 		border-style: dashed;
 	}
+
+	@media (max-width: 520px) {
+		.hero { padding: 28px 14px 0; }
+		h1 { font-size: clamp(34px, 9vw, 44px); line-height: 1.08; }
+		.lead { font-size: 15px; margin: 16px auto 20px; padding: 0 4px; }
+		.eyebrow { font-size: 12px; padding: 6px 12px; }
+		.cta { padding: 13px 20px; font-size: 14.5px; width: 100%; max-width: 300px; justify-content: center; }
+		.platforms { gap: 8px; padding: 0 4px; }
+		.platformLogo { height: 36px; }
+		.platformLogo.androidStacked, .platformLogo.androidTvStacked, .platformLogo.macosStacked { padding: 4px 10px; }
+		.platformLogo svg { transform: scale(0.86); transform-origin: center; }
+	}
 </style>

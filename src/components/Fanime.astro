@@ -1,0 +1,109 @@
+---
+const apkHref = "/downloads/fanime.apk";
+const exeHref = "/downloads/fAnime_Setup.exe";
+---
+
+<section id="fanime" class="fanime">
+	<div class="head">
+		<p class="eyebrow">fAnime — v1.0.16 (build 17)</p>
+		<h2>Anime, on Android &amp; PC.</h2>
+		<p class="sub">
+			fAnime is a Flutter anime app — browse, track, continue-watching, downloads for offline,
+			and HLS playback. Android build sideloads directly; PC build ships as a Windows installer.
+		</p>
+	</div>
+
+	<div class="grid">
+		<a class="card" href={apkHref} download>
+			<span class="icon" aria-hidden="true">
+				<svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor">
+					<path d="M12 16.5 6.2 10.7l1.4-1.4 3.4 3.4V3h2v10.3l3.4-3.4 1.4 1.4L12 16.5ZM4.5 18v2h15v-2H4.5Z" />
+				</svg>
+			</span>
+			<span class="badge ok">Available</span>
+			<span class="label">Android — APK</span>
+			<span class="note">96.8 MB • Android 8.0+ • com.example.fanime</span>
+			<span class="file">fanime.apk</span>
+		</a>
+
+		<a class="card" href={exeHref} download>
+			<span class="icon" aria-hidden="true">
+				<svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor">
+					<path d="M12 16.5 6.2 10.7l1.4-1.4 3.4 3.4V3h2v10.3l3.4-3.4 1.4 1.4L12 16.5ZM4.5 18v2h15v-2H4.5Z" />
+				</svg>
+			</span>
+			<span class="badge ok">Available</span>
+			<span class="label">PC — Windows Setup</span>
+			<span class="note">47.4 MB • Inno Setup • Windows 10/11</span>
+			<span class="file">fAnime_Setup.exe</span>
+		</a>
+	</div>
+
+	<div class="meta">
+		<div>
+			<span class="metaTitle">Android details</span>
+			<p>Package <code>com.example.fanime</code> • version <code>1.0.16 (17)</code> • minSdk 26 • targetSdk 36. Permissions: internet, media/storage, wake-lock, foreground download service, billing.</p>
+		</div>
+		<div>
+			<span class="metaTitle">Install notes</span>
+			<p>Android: allow “install unknown apps” then open the APK. PC: run the <code>.exe</code>, accept the Inno Setup wizard; Windows SmartScreen may ask for confirmation on first run.</p>
+		</div>
+	</div>
+</section>
+
+<style>
+	.fanime {
+		margin: 0;
+		padding: 72px 52px 40px;
+		background: #091312;
+		border-top: 1px solid rgba(255, 255, 255, 0.08);
+	}
+	.head { max-width: 720px; margin: 0 auto 22px; text-align: center; }
+	.eyebrow {
+		display: inline-flex; margin: 0 auto 14px; padding: 7px 14px; border-radius: 999px;
+		background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14);
+		font-size: 13px; font-weight: 700; color: #e8eaed; letter-spacing: 0.02em;
+	}
+	.head h2 {
+		margin: 0; font-size: clamp(24px, 3vw, 36px); letter-spacing: -0.03em;
+		line-height: 1.1; color: #fff;
+	}
+	.sub { margin: 10px auto 0; max-width: 640px; color: #c7c7cc; line-height: 1.55; font-size: 15px; }
+	.grid {
+		display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px;
+		max-width: 920px; margin: 0 auto;
+	}
+	.card {
+		display: flex; flex-direction: column; gap: 10px; padding: 18px 16px;
+		border-radius: 16px; text-decoration: none;
+		background: linear-gradient(135deg, #fbd9e7 0 49.7%, #ffffff 49.7% 50.3%, #1c1c1e 50.3% 100%);
+		border: 1px solid rgba(255,255,255,0.14);
+		transition: transform 0.15s, border-color 0.2s, box-shadow 0.2s;
+	}
+	.card:hover { transform: translateY(-1px); border-color: rgba(0,163,255,0.28); box-shadow: 0 12px 28px rgba(0,0,0,0.35); }
+	.icon {
+		width: 48px; height: 48px; border-radius: 13px; display: grid; place-items: center;
+		background: #fff; border: 1px solid rgba(255,255,255,0.12); color: #091312;
+	}
+	.row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+	.label { font-weight: 800; color: #0b0b0f; letter-spacing: -0.02em; font-size: 17px; }
+	.badge {
+		align-self: flex-start; padding: 5px 9px; border-radius: 999px;
+		font-size: 11px; font-weight: 700; background: #00a3ff; color: #fff;
+	}
+	.note {
+		font-size: 13px; color: #1c1c1e; font-weight: 600; background: rgba(255,255,255,0.78);
+		padding: 2px 8px; border-radius: 999px; align-self: flex-start;
+		border: 1px solid rgba(23,23,27,0.06);
+	}
+	.file { font-size: 12px; color: #6b6b77; font-family: ui-monospace, monospace; }
+	.meta {
+		display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px;
+		max-width: 920px; margin: 14px auto 0; padding: 16px;
+		border-radius: 16px; background: #0b0b0f; border: 1px solid rgba(255,255,255,0.08);
+	}
+	.metaTitle { font-weight: 800; color: #fff; font-size: 14px; letter-spacing: -0.01em; }
+	.meta p { margin: 8px 0 0; font-size: 13px; line-height: 1.6; color: #c7c7cc; }
+	.meta code { background: rgba(255,255,255,0.08); padding: 2px 6px; border-radius: 8px; color: #e8eaed; font-size: 12px; }
+	@media (max-width: 900px) { .fanime { padding: 56px 18px 24px; } .grid, .meta { grid-template-columns: 1fr; } }
+</style>
