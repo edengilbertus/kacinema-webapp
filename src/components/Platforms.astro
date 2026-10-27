@@ -6,7 +6,7 @@ const version = propVersion ?? {
 	name: "1.1.21",
 	apkUrl: "https://pub-10cadac4a39b4f1a93e87fa79d05c668.r2.dev/kacinema-1.1.21.apk",
 	apkUrlTv: "https://pub-10cadac4a39b4f1a93e87fa79d05c668.r2.dev/kacinema-1.1.21.apk",
-	pcUrl: null,
+	pcUrl: "https://downloads.minadel.tech/kacinema-oracle-1.0.0.msi",
 	macUrl: null,
 	changelog: "Android TV D-pad fix. R8 obfuscation. VJ Browse cards. Home carousel. Dynamic VJ rows. New Releases.",
 };
@@ -14,7 +14,7 @@ const version = propVersion ?? {
 const platforms = [
 	{ k: "android", label: "Android", status: "Available", href: version.apkUrl, note: "" },
 	{ k: "tv", label: "Android TV", status: "Available", href: version.apkUrlTv ?? version.apkUrl, note: "" },
-	{ k: "pc", label: "PC", status: version.pcUrl ? "Available" : "Coming soon", href: version.pcUrl ?? "#", note: "Windows" },
+	{ k: "pc", label: "PC", status: version.pcUrl ? "Available" : "Coming soon", href: version.pcUrl ?? "#", note: "Windows 10/11" },
 	{ k: "mac", label: "macOS", status: version.macUrl ? "Available" : "Coming soon", href: version.macUrl ?? "#", note: "Apple Silicon" },
 ];
 ---
@@ -22,8 +22,8 @@ const platforms = [
 <section id="platforms" class="platforms">
 	<div id="download" aria-hidden="true"></div>
 	<div class="head">
-		<h2>Every screen, coming soon everywhere</h2>
-		<p>Android + Android TV available now.</p>
+		<h2>Every screen, all in one place</h2>
+		<p>Android + Android TV + Windows available now.</p>
 	</div>
 
 	<div class="grid">

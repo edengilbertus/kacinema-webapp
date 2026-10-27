@@ -7,10 +7,12 @@ import Fanime from '../components/Fanime.astro';
 import Screenshots from '../components/Screenshots.astro';
 
 const VERSION_URL = "https://pub-10cadac4a39b4f1a93e87fa79d05c668.r2.dev/version.json";
+const PC_URL = "https://downloads.minadel.tech/kacinema-oracle-1.0.0.msi";
 const FALLBACK = {
 	code: 21,
 	name: "1.1.21",
 	apkUrl: "https://pub-10cadac4a39b4f1a93e87fa79d05c668.r2.dev/kacinema-1.1.21.apk",
+	pcUrl: PC_URL,
 	changelog: "Android TV D-pad fix. R8 obfuscation. VJ Browse cards. Home carousel. Dynamic VJ rows. New Releases.",
 };
 
@@ -24,7 +26,7 @@ try {
 			name: j.versionName ?? j.name ?? FALLBACK.name,
 			apkUrl: j.apkUrl ?? j.androidUrl ?? FALLBACK.apkUrl,
 			apkUrlTv: j.apkUrlTv ?? j.tvUrl ?? j.apkUrl ?? FALLBACK.apkUrl,
-			pcUrl: j.pcUrl ?? j.windowsUrl ?? null,
+			pcUrl: j.pcUrl ?? j.windowsUrl ?? FALLBACK.pcUrl,
 			macUrl: j.macUrl ?? j.macosUrl ?? null,
 			changelog: j.changelog ?? FALLBACK.changelog,
 		};
